@@ -41,22 +41,22 @@ export class TeamComponent {
   otherMembers = [
     {
       name: 'Jay Vasisht',
-      position: 'Operations',
+      position: 'Operation Head',
       imageUrl: 'assets/jai_vashist.jpeg',
     },
     {
       name: 'Sanjay Sharma',
-      position: 'Operation Head',
+      position: 'Fundraising Manager',
       imageUrl: 'assets/sanjay_sharma.jpeg',
     },
     {
       name: 'Chirag Sharma',
-      position: 'Financial Advisor',
+      position: 'Finance Officer',
       imageUrl: 'assets/chirag.jpeg',
     },
     {
       name: 'Shivam Singh',
-      position: 'Operation Head',
+      position: 'Project Coordinator',
       imageUrl: 'assets/shivam_singh.jpeg',
     }
   ];

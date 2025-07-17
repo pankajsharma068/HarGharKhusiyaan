@@ -1,37 +1,25 @@
-<nav class="navbar">
-  <!-- Logo and Text Container -->
-  <div class="logo-text-container">
-    <img class="logo" src="/assets/logo_ngo.jpg" alt="NGO Logo" />
-    <h2>Har Ghar Khushiyan</h2>
+<nav class="navbar" [class.expanded]="menuOpen">
+  <!-- Logo and Toggle -->
+  <div class="top-row">
+    <div class="logo-text-container">
+      <img class="logo" src="/assets/hgkwf_logo.jpeg" alt="NGO Logo" />
+      <h2>Har Ghar Khushiyan</h2>
+    </div>
+    <div class="hamburger" (click)="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </div>
 
-  <!-- Navigation Links for Desktop -->
-  <div class="nav-links">
+  <!-- Navigation Links -->
+  <div class="nav-links" [class.show-on-mobile]="menuOpen">
     <a
       *ngFor="let link of navLinks"
       [routerLink]="link.path"
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }"
-    >
-      {{ link.name }}
-    </a>
-  </div>
-
-  <!-- Hamburger Menu for Mobile -->
-  <div class="hamburger" (click)="toggleMenu()">
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-
-  <!-- Navigation Links for Mobile -->
-  <div class="nav-links-mobile" *ngIf="menuOpen">
-    <a
-      *ngFor="let link of navLinks"
-      [routerLink]="link.path"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
-      (click)="toggleMenu()"
+      (click)="menuOpen = false"
     >
       {{ link.name }}
     </a>

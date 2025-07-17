@@ -1,0 +1,48 @@
+<div class="team-container">
+  <h1 class="team-heading" style="margin-bottom: 5rem;">Core Team</h1>
+  
+  <!-- First Row: CEO -->
+  <div class="team-row">
+    <div *ngFor="let member of Ceo" class="team-member" @fadeIn>
+      <ng-container *ngIf="member.position === 'CEO'">
+        <div class="member-image-container">
+          <img [src]="member.imageUrl" [alt]="member.name" class="member-image" />
+        </div>
+        <div class="member-details">
+          <h3 class="member-name">{{ member.name }}</h3>
+          <p class="member-position">{{ member.position }}</p>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- Second Row: CTO and CMO -->
+  <div class="team-row">
+    <div *ngFor="let member of teamMembers" class="team-member" @fadeIn>
+      <ng-container *ngIf="member.position === 'CTO' || member.position === 'CMO'">
+        <div class="member-image-container">
+          <img [src]="member.imageUrl" [alt]="member.name" class="member-image" />
+        </div>
+        <div class="member-details">
+          <h3 class="member-name">{{ member.name }}</h3>
+          <p class="member-position">{{ member.position }}</p>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <!-- Third Row: Other Members -->
+  <div class="team-row">
+    <div *ngFor="let member of otherMembers" class="team-member" @fadeIn>
+      <ng-container *ngIf="member.position !== 'CEO' && member.position !== 'CTO' && member.position !== 'CMO'">
+        <div class="member-image-container">
+          <img [src]="member.imageUrl" [alt]="member.name" class="member-image" />
+        </div>
+        <div class="member-details">
+          <h3 class="member-name">{{ member.name }}</h3>
+          <p class="member-position">{{ member.position }}</p>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

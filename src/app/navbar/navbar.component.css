@@ -1,0 +1,130 @@
+/* General styles for the navbar */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
+}
+
+/* Group logo and text together */
+.logo-text-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between logo and text */
+}
+
+.logo {
+  width: 50px;
+  height: auto;
+  border-radius: 50%;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #007bff;
+}
+
+.active {
+  font-weight: bold;
+  color: #007bff;
+}
+
+/* Text alignment for "Har Ghar Khushiyan" */
+.navbar h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  text-align: left;
+}
+
+/* Hamburger menu styles */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  z-index: 20;
+}
+
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background-color: #333;
+  margin: 4px 0;
+  transition: 0.3s;
+}
+
+.nav-links-mobile {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #f9f9f9;
+  position: absolute;
+  top: 60px;
+  right: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 20;
+}
+
+.nav-links-mobile a {
+  text-decoration: none;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.nav-links-mobile a:hover {
+  color: #007bff;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-links-mobile {
+    display: flex;
+  }
+
+  .logo-text-container {
+    justify-content: center; /* Center logo and text for smaller screens */
+  }
+
+  .navbar h2 {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    width: 40px; /* Reduce logo size */
+  }
+
+  .logo-text-container {
+    flex-direction: column; /* Stack logo and text vertically for very small screens */
+    gap: 5px;
+  }
+
+  .navbar h2 {
+    font-size: 1rem;
+    text-align: center; /* Center text for very small screens */
+  }
+}

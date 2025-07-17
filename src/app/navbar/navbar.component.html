@@ -1,0 +1,39 @@
+<nav class="navbar">
+  <!-- Logo and Text Container -->
+  <div class="logo-text-container">
+    <img class="logo" src="/assets/logo_ngo.jpg" alt="NGO Logo" />
+    <h2>Har Ghar Khushiyan</h2>
+  </div>
+
+  <!-- Navigation Links for Desktop -->
+  <div class="nav-links">
+    <a
+      *ngFor="let link of navLinks"
+      [routerLink]="link.path"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      {{ link.name }}
+    </a>
+  </div>
+
+  <!-- Hamburger Menu for Mobile -->
+  <div class="hamburger" (click)="toggleMenu()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <!-- Navigation Links for Mobile -->
+  <div class="nav-links-mobile" *ngIf="menuOpen">
+    <a
+      *ngFor="let link of navLinks"
+      [routerLink]="link.path"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      (click)="toggleMenu()"
+    >
+      {{ link.name }}
+    </a>
+  </div>
+</nav>

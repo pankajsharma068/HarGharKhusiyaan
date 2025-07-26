@@ -23,7 +23,7 @@ export class TeamComponent {
   Ceo =[ {
     name: 'Shubham Sharma',
     position: 'CEO',
-    imageUrl: 'assets/shubham.jpeg',
+    imageUrl: 'assets/shub_new.jpeg',
   }];
 
   teamMembers = [
@@ -58,6 +58,26 @@ export class TeamComponent {
       name: 'Shivam Singh',
       position: 'Project Coordinator',
       imageUrl: 'assets/shivam_singh.jpeg',
-    }
+    },
+    {
+      name: 'Shivam Sharma',
+      position: 'HR Generalist',
+      imageUrl: 'assets/shiv_sh.jpeg',
+    },
+    {
+      name: 'Devesh Sharma',
+      position: 'Finance Manager',
+      imageUrl: 'assets/Devesh_sharma.jpeg',
+    },
+    {
+      name: 'Gourav Sharma',
+      position: 'Community Outreach Coordinator',
+      imageUrl: 'assets/gaurav_sharma.jpeg',
+    } ,
+    {
+      name: 'Vivek Sharma',
+      position: 'Event Manager',
+      imageUrl: 'assets/vivek_sharma.jpeg',
+    }       
   ];
 }

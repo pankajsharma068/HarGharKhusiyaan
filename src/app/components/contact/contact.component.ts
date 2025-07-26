@@ -15,41 +15,28 @@ import emailjs from 'emailjs-com';
   styleUrl: './contact.component.css'
 })
 export class ContactComponent {
-  
-  successMessage = false;
-  errorMessage = false; // Flag to show error message
+  async onSubmit(event: Event) {
+    event.preventDefault();
+    const form = event.target as HTMLFormElement;
+    const data = new FormData(form);
 
-  onSubmitform(){
-
-    console.log('Form submitted successfully!');
-    
-    // contactForm.reset(); // Clear the form fields
-      setTimeout(() => this.successMessage = false, 3000); // Hide after 3 seconds
-
-
+    try {
+      const res = await fetch('https://formspree.io/f/xqalqjed', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        alert('Message sent!');
+        form.reset();
+      } else {
+        const err = await res.json();
+        console.error(err);
+        alert('Failed to send.');
+      }
+    } catch (e) {
+      console.error(e);
+      alert('Network error.');
+    }
   }
-  onSubmit(contactForm: any) {
-    const serviceID = 'service_qarp3aj'; // Replace with your EmailJS service ID
-    const templateID = 'your_template_id'; // Replace with your EmailJS template ID
-    const userID = 'Hargharkhushiyan'; // Replace with your EmailJS user ID
-
-    const templateParams = {
-      name: contactForm.value.name,
-      email: contactForm.value.email,
-      message: contactForm.value.message
-    };
-
-    emailjs.send(serviceID, templateID, templateParams, userID)
-    .then((response) => {
-      console.log('Email sent successfully!', response.status, response.text);
-      this.successMessage = true; // Show success message
-      contactForm.reset(); // Clear the form fields
-      setTimeout(() => this.successMessage = false, 3000); // Hide after 3 seconds
-    })
-    .catch((error) => {
-      console.error('Failed to send email:', error);
-      alert('Failed to send your message. Please try again later.');
-    });
-  }
-
 }

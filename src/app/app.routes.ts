@@ -6,10 +6,10 @@ import { DonateComponent } from './components/donate/donate.component';
 import { TeamComponent } from './components/team/team.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'donate', component: DonateComponent },
   { path: 'team', component: TeamComponent },
-
+  { path: '', redirectTo: '/home', pathMatch: 'full' } // Default route
 ];

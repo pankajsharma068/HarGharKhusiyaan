@@ -93,3 +93,29 @@ body {
     margin: 0;
     font-size: 1.2rem;
   }
+
+
+  .qr-code-section {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .qr-code-image {
+    width: 150px; /* Adjust the width for smaller devices */
+    height: auto; /* Maintain aspect ratio */
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  
+  /* Add media query for responsiveness */
+  @media (max-width: 768px) {
+    .qr-code-image {
+      width: 150px; /* Further reduce size for smaller screens */
+    }
+  }
+
+  .tax-benefit {
+    background-color: rgb(238, 234, 234);
+    padding: 20px;
+    border-radius: 8px;
+}

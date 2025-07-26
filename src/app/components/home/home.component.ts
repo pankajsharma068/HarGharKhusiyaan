@@ -13,8 +13,8 @@ export class HomeComponent {
 
   currentIndex = 0;
   images = [
-    { src:'assets/fp-2.jpg', caption: 'Welcome to Har Ghar Khushiyan' },
-    { src: 'assets/fp-3.jpg', caption: 'Welcome to Har Ghar Khushiyan' },
+    { src:'assets/front_img.jpeg', caption: 'Welcome to Har Ghar Khushiyan' },
+    { src: 'assets/front_img2.jpeg', caption: 'Welcome to Har Ghar Khushiyan' },
     { src: 'https://y4d.ngo/admin/uploads/banner/Landing_banner4.jpg', caption: 'Welcome to Har Ghar Khushiyan' }
   ];
 

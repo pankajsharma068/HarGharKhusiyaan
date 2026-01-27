@@ -35,10 +35,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   // Impact Stats with animation
   impactStats = [
-    { icon: '❤️', count: 0, target: 10000, suffix: '+', label: 'Lives Touched' },
-    { icon: '🤝', count: 0, target: 500, suffix: '+', label: 'Volunteers' },
-    { icon: '🏘️', count: 0, target: 50, suffix: '+', label: 'Communities Served' },
-    { icon: '🎯', count: 0, target: 100, suffix: '+', label: 'Projects Completed' }
+    { icon: '❤️', count: 0, target: 1000, suffix: '+', label: 'Lives Touched' },
+    { icon: '🤝', count: 0, target: 100, suffix: '+', label: 'Volunteers' },
+    { icon: '🏘️', count: 0, target: 10, suffix: '+', label: 'Communities Served' },
+    { icon: '🎯', count: 0, target: 10, suffix: '+', label: 'Projects Completed' }
   ];
 
   // Progress Goals

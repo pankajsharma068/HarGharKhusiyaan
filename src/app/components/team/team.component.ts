@@ -1,5 +1,10 @@
-import { Component, AfterViewInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  Component,
+  AfterViewInit,
+  Inject,
+  PLATFORM_ID
+} from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 interface TeamMember {
   name: string;
@@ -17,6 +22,9 @@ interface TeamMember {
   styleUrls: ['./team.component.css']
 })
 export class TeamComponent implements AfterViewInit {
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+
   flippedCards: { [key: string]: boolean } = {};
 
   ceo: TeamMember = {
@@ -26,53 +34,6 @@ export class TeamComponent implements AfterViewInit {
     bio: 'Leading Har Ghar Khushiyan with vision and passion for social change.',
     email: 'shubham@hargharkhushiyan.co.in'
   };
-
-  constructor() {
-    console.log('=== TEAM COMPONENT DEBUG ===');
-    console.log('Component loaded successfully');
-    console.log('CEO data:', this.ceo);
-    console.log('CEO image path:', this.ceo.imageUrl);
-    console.log('Window location:', window.location.href);
-    
-    // Check if assets folder is accessible
-    const testImg = new Image();
-    testImg.onload = () => console.log('✅ Test image loaded successfully');
-    testImg.onerror = () => console.error('❌ Test image failed to load');
-    testImg.src = this.ceo.imageUrl;
-  }
-
-  ngAfterViewInit(): void {
-    console.log('=== VIEW INITIALIZED ===');
-    const ceoSection = document.querySelector('.ceo-section');
-    const ceoCard = document.querySelector('.ceo-card');
-    const ceoImage = document.querySelector('.ceo-card img');
-    
-    console.log('CEO Section exists:', !!ceoSection);
-    console.log('CEO Card exists:', !!ceoCard);
-    console.log('CEO Image exists:', !!ceoImage);
-    
-    if (ceoImage) {
-      console.log('Image src:', (ceoImage as HTMLImageElement).src);
-      console.log('Image complete:', (ceoImage as HTMLImageElement).complete);
-      console.log('Image naturalWidth:', (ceoImage as HTMLImageElement).naturalWidth);
-    }
-  }
-
-  onImageError(event: any): void {
-    console.error('❌ IMAGE LOAD FAILED');
-    console.error('Failed URL:', event.target.src);
-    console.error('Full error:', event);
-    
-    // Try alternative paths
-    const originalSrc = event.target.src;
-    if (originalSrc.includes('/assets/')) {
-      console.log('Trying without leading slash...');
-      event.target.src = originalSrc.replace('/assets/', 'assets/');
-    } else if (originalSrc.includes('assets/')) {
-      console.log('Trying with ./assets/...');
-      event.target.src = './' + originalSrc.split('assets/')[1];
-    }
-  }
 
   teamMembers: TeamMember[] = [
     {
@@ -142,11 +103,47 @@ export class TeamComponent implements AfterViewInit {
     }
   ];
 
+  ngAfterViewInit(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    // Browser-only debug (safe)
+    console.log('=== TEAM COMPONENT VIEW INITIALIZED ===');
+
+    const ceoSection = document.querySelector('.ceo-section');
+    const ceoCard = document.querySelector('.ceo-card');
+    const ceoImage = document.querySelector('.ceo-card img');
+
+    console.log('CEO Section exists:', !!ceoSection);
+    console.log('CEO Card exists:', !!ceoCard);
+    console.log('CEO Image exists:', !!ceoImage);
+
+    if (ceoImage) {
+      const img = ceoImage as HTMLImageElement;
+      console.log('Image src:', img.src);
+      console.log('Image complete:', img.complete);
+      console.log('Image naturalWidth:', img.naturalWidth);
+    }
+  }
+
+  onImageError(event: any): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    const img = event?.target as HTMLImageElement;
+    if (!img || !img.src) return;
+
+    console.error('❌ IMAGE LOAD FAILED:', img.src);
+
+    // Fallback asset path
+    if (img.src.includes('/assets/')) {
+      img.src = img.src.replace('/assets/', 'assets/');
+    }
+  }
+
   toggleFlip(id: string): void {
     this.flippedCards[id] = !this.flippedCards[id];
   }
 
   isFlipped(id: string): boolean {
-    return this.flippedCards[id] || false;
+    return !!this.flippedCards[id];
   }
 }

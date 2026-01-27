@@ -1,48 +1,117 @@
 <div class="team-container">
-  <h1 class="team-heading" style="margin-bottom: 5rem;">Core Team</h1>
-  
-  <!-- First Row: CEO -->
-  <div class="team-row">
-    <div *ngFor="let member of Ceo" class="team-member" @fadeIn>
-      <ng-container *ngIf="member.position === 'CEO'">
-        <div class="member-image-container">
-          <img [src]="member.imageUrl" [alt]="member.name" class="member-image" />
+  <div class="team-header">
+    <h1 class="team-heading">Meet Our Team</h1>
+    <p class="team-subtitle">The passionate people behind Har Ghar Khushiyan</p>
+  </div>
+
+  <!-- CEO Section - ALWAYS VISIBLE -->
+  <div class="ceo-section">
+    <div class="team-card ceo-card"
+         [class.flipped]="isFlipped('ceo')"
+         (click)="toggleFlip('ceo')">
+      <div class="card-inner">
+        <!-- Front -->
+        <div class="card-front">
+          <div class="member-image-wrapper">
+            <img [src]="ceo.imageUrl" 
+                 [alt]="ceo.name" 
+                 class="member-image"
+                 (error)="onImageError($event)" />
+          </div>
+          <div class="member-info">
+            <h3 class="member-name">{{ ceo.name }}</h3>
+            <p class="member-position">{{ ceo.position }}</p>
+            <div class="position-badge">Leadership</div>
+            <p class="click-hint-text">👆 Click to learn more</p>
+          </div>
         </div>
-        <div class="member-details">
-          <h3 class="member-name">{{ member.name }}</h3>
-          <p class="member-position">{{ member.position }}</p>
+        
+        <!-- Back -->
+        <div class="card-back">
+          <div class="card-back-content">
+            <h3 class="back-name">{{ ceo.name }}</h3>
+            <p class="back-position">{{ ceo.position }}</p>
+            <p class="back-bio">{{ ceo.bio }}</p>
+            <a *ngIf="ceo.email" [href]="'mailto:' + ceo.email" class="contact-link">
+              📧 Contact
+            </a>
+            <p class="flip-back-hint">👆 Click to flip back</p>
+          </div>
         </div>
-      </ng-container>
+      </div>
     </div>
   </div>
 
-  <!-- Second Row: CTO and CMO -->
-  <div class="team-row">
-    <div *ngFor="let member of teamMembers" class="team-member" @fadeIn>
-      <ng-container *ngIf="member.position === 'CTO' || member.position === 'CMO'">
-        <div class="member-image-container">
-          <img [src]="member.imageUrl" [alt]="member.name" class="member-image" />
+  <!-- Leadership Team -->
+  <div class="leadership-section">
+    <h2 class="section-title">Leadership Team</h2>
+    <div class="team-grid leadership-grid">
+      <div *ngFor="let member of teamMembers; let i = index" 
+           class="team-card"
+           [class.flipped]="isFlipped('leader-' + i)"
+           (click)="toggleFlip('leader-' + i)">
+        <div class="card-inner">
+          <!-- Front -->
+          <div class="card-front">
+            <div class="member-image-wrapper">
+              <img [src]="member.imageUrl" [alt]="member.name" class="member-image" />
+            </div>
+            <div class="member-info">
+              <h3 class="member-name">{{ member.name }}</h3>
+              <p class="member-position">{{ member.position }}</p>
+              <p class="click-hint-text">👆 Click to learn more</p>
+            </div>
+          </div>
+          
+          <!-- Back -->
+          <div class="card-back">
+            <div class="card-back-content">
+              <h3 class="back-name">{{ member.name }}</h3>
+              <p class="back-position">{{ member.position }}</p>
+              <p class="back-bio">{{ member.bio }}</p>
+              <a *ngIf="member.email" [href]="'mailto:' + member.email" class="contact-link">
+                📧 Contact
+              </a>
+              <p class="flip-back-hint">👆 Click to flip back</p>
+            </div>
+          </div>
         </div>
-        <div class="member-details">
-          <h3 class="member-name">{{ member.name }}</h3>
-          <p class="member-position">{{ member.position }}</p>
-        </div>
-      </ng-container>
+      </div>
     </div>
   </div>
 
-  <!-- Third Row: Other Members -->
-  <div class="team-row">
-    <div *ngFor="let member of otherMembers" class="team-member" @fadeIn>
-      <ng-container *ngIf="member.position !== 'CEO' && member.position !== 'CTO' && member.position !== 'CMO'">
-        <div class="member-image-container">
-          <img [src]="member.imageUrl" [alt]="member.name" class="member-image" />
+  <!-- Core Team -->
+  <div class="core-team-section">
+    <h2 class="section-title">Core Team</h2>
+    <div class="team-grid">
+      <div *ngFor="let member of otherMembers; let i = index" 
+           class="team-card"
+           [class.flipped]="isFlipped('member-' + i)"
+           (click)="toggleFlip('member-' + i)">
+        <div class="card-inner">
+          <!-- Front -->
+          <div class="card-front">
+            <div class="member-image-wrapper">
+              <img [src]="member.imageUrl" [alt]="member.name" class="member-image" />
+            </div>
+            <div class="member-info">
+              <h3 class="member-name">{{ member.name }}</h3>
+              <p class="member-position">{{ member.position }}</p>
+              <p class="click-hint-text">👆 Click to learn more</p>
+            </div>
+          </div>
+          
+          <!-- Back -->
+          <div class="card-back">
+            <div class="card-back-content">
+              <h3 class="back-name">{{ member.name }}</h3>
+              <p class="back-position">{{ member.position }}</p>
+              <p class="back-bio">{{ member.bio }}</p>
+              <p class="flip-back-hint">👆 Click to flip back</p>
+            </div>
+          </div>
         </div>
-        <div class="member-details">
-          <h3 class="member-name">{{ member.name }}</h3>
-          <p class="member-position">{{ member.position }}</p>
-        </div>
-      </ng-container>
+      </div>
     </div>
   </div>
 </div>

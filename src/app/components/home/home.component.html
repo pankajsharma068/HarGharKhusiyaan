@@ -1,96 +1,190 @@
-
-
-<div class="carousel">
-    <div class="carousel-inner" [style.transform]="'translateX(' + (-currentIndex * 100) + '%)'">
-      <div class="carousel-item active" *ngFor="let image of images">
-        <img [src]="image.src" [alt]="image.caption" style="height: 400px; object-fit: cover;">
-        <div class="caption">{{ image.caption }}</div>
+<!-- Hero Carousel Section -->
+<div class="hero-carousel">
+  <div class="carousel-inner" [style.transform]="'translateX(' + (-currentIndex * 100) + '%)'">
+    <div class="carousel-item" *ngFor="let image of images">
+      <img [src]="image.src" [alt]="image.caption">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1 class="hero-title">{{ image.caption }}</h1>
+        <p class="hero-subtitle">{{ image.subtitle }}</p>
+        <div class="hero-buttons">
+          <a href="/donate" class="btn btn-primary">Donate Now</a>
+          <a href="/about" class="btn btn-secondary">Learn More</a>
+        </div>
       </div>
     </div>
-    <button class="carousel-control prev" (click)="prevSlide()">&#10094;</button>
-    <button class="carousel-control next" (click)="nextSlide()">&#10095;</button>
+  </div>
+  <button class="carousel-control prev" (click)="prevSlide(); stopAutoPlay()">
+    <span>❮</span>
+  </button>
+  <button class="carousel-control next" (click)="nextSlide(); stopAutoPlay()">
+    <span>❯</span>
+  </button>
+  
+  <!-- Carousel Indicators -->
+  <div class="carousel-indicators">
+    <span 
+      *ngFor="let image of images; let i = index" 
+      [class.active]="i === currentIndex"
+      (click)="currentIndex = i; stopAutoPlay()">
+    </span>
+  </div>
 </div>
 
+<!-- Impact Stats Section -->
+<section class="impact-stats fade-in-on-scroll">
+  <div class="container">
+    <h2 class="section-title">Our Impact</h2>
+    <div class="stats-grid">
+      <div class="stat-card" *ngFor="let stat of impactStats">
+        <div class="stat-icon">{{ stat.icon }}</div>
+        <div class="stat-number">{{ stat.count }}{{ stat.suffix }}</div>
+        <div class="stat-label">{{ stat.label }}</div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- Progress Goals Section -->
+<section class="progress-goals fade-in-on-scroll">
+  <div class="container">
+    <h2 class="section-title">Current Fundraising Goals</h2>
+    <div class="progress-grid">
+      <div class="progress-card" *ngFor="let goal of progressGoals">
+        <div class="progress-header">
+          <span class="progress-icon">{{ goal.icon }}</span>
+          <h3>{{ goal.title }}</h3>
+        </div>
+        <div class="progress-bar-container">
+          <div class="progress-bar" [style.width.%]="getProgressPercentage(goal.current, goal.target)"></div>
+        </div>
+        <div class="progress-info">
+          <span class="progress-current">₹{{ goal.current.toLocaleString() }}</span>
+          <span class="progress-target">of ₹{{ goal.target.toLocaleString() }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<div class="our-works">
-  <h2 class="section-title">Our Key Focus Areas</h2>
-    <div class="works-grid">
-      <!-- Work Item 1 -->
-      <div class="work-item">
-        <div class="image-container">
-          <img src="assets/education_img.jpeg" alt="Work 1">
-          <div class="overlay">
-            <div class="description">
-            <p>To promote Art, Education, Science and Research, Charity, Commerce, Women and 
-              Child Development, Sports, Social Welfare, Religion and Animal Care and To protect 
-              Environment, Forests, and Nature.</p>    
+<!-- Focus Areas Section -->
+<section class="focus-areas fade-in-on-scroll">
+  <div class="container">
+    <h2 class="section-title">Our Key Focus Areas</h2>
+    <div class="focus-grid">
+      <div class="focus-card" *ngFor="let area of focusAreas">
+        <div class="focus-image-wrapper">
+          <img [src]="area.image" [alt]="area.title">
+          <div class="focus-icon">{{ area.icon }}</div>
+        </div>
+        <div class="focus-content">
+          <h3>{{ area.title }}</h3>
+          <p>{{ area.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- Call to Action Banner -->
+<section class="cta-banner fade-in-on-scroll">
+  <div class="container">
+    <h2>Join Our Mission to Spread Happiness</h2>
+    <p>Your support can change lives and bring hope to those in need</p>
+    <div class="cta-buttons">
+      <a href="/donate" class="btn btn-light">Donate Now</a>
+      <a href="/contact" class="btn btn-outline">Volunteer With Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- Floating Action Button -->
+<a href="/donate" class="fab" [class.show]="showFAB" title="Donate Now">
+  <span class="fab-icon">💝</span>
+  <span class="fab-text">Donate</span>
+</a>
+
+<!-- Services Section -->
+<section class="services fade-in-on-scroll">
+  <div class="container">
+    <h2 class="section-title">Our Services</h2>
+    <div class="services-grid">
+      <div class="service-card" *ngFor="let service of services">
+        <div class="service-image">
+          <img [src]="service.image" [alt]="service.title">
+          <div class="service-overlay"></div>
+        </div>
+        <div class="service-content">
+          <h3>{{ service.title }}</h3>
+          <p>{{ service.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials fade-in-on-scroll">
+  <div class="container">
+    <h2 class="section-title">What People Say</h2>
+    <div class="testimonial-slider">
+      <button class="testimonial-nav prev" (click)="prevTestimonial()">❮</button>
+      <div class="testimonial-content">
+        <div class="testimonial-card" *ngIf="testimonials[currentTestimonial]">
+          <div class="stars">
+            <span *ngFor="let star of [1,2,3,4,5]">⭐</span>
+          </div>
+          <p class="testimonial-text">"{{ testimonials[currentTestimonial].text }}"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">{{ testimonials[currentTestimonial].name.charAt(0) }}</div>
+            <div class="author-info">
+              <h4>{{ testimonials[currentTestimonial].name }}</h4>
+              <p>{{ testimonials[currentTestimonial].role }}</p>
             </div>
           </div>
         </div>
-        <h3 style="background-color: rgb(140, 152, 152);">Education for All</h3>
       </div>
-  
-      <!-- Work Item 2 -->
-      <div class="work-item">
-        <div class="image-container">
-          <img src="https://y4d.ngo/admin/uploads/widgets/Child_Upliftment_150x150px.png" alt="Work 2">
-          <div class="overlay">
-            <div class="description">
-              <p>To organize different community–based health care programmes in the backward 
-                villages with a view to bring a lasting improvement in the health, hygiene, sanitary 
-                condition, safe drinking water of the poor villagers.</p>
-            </div>
-          </div>
-        </div>
-        <h3 style="background-color: rgb(140, 152, 152)">Healthcare Initiatives</h3>
-      </div>
-  
-      <!-- Work Item 3 -->
-      <div class="work-item">
-        <div class="image-container">
-          <img src="assets/hgk_img.jpg" alt="Work 3">
-          <div class="overlay">
-            <div class="description">
-              <p>To improve the environment and ecology in the rural area by taking up different 
-                protection programmes. Tree plantation and renewable energy will be emphasized 
-                upon to bring sustainable change.</p>
-            </div>
-          </div>
-        </div>
-        <h3 style="background-color: rgb(140, 152, 152)" >Community Development</h3>
+      <button class="testimonial-nav next" (click)="nextTestimonial()">❯</button>
+    </div>
+  </div>
+</section>
+
+<!-- Partners Section -->
+<!-- <section class="partners fade-in-on-scroll">
+  <div class="container">
+    <h2 class="section-title">Our Partners</h2>
+    <p class="partners-subtitle">Trusted by leading organizations</p>
+    <div class="partners-grid">
+      <div class="partner-logo" *ngFor="let partner of partners">
+        <div class="partner-placeholder">{{ partner.name }}</div>
       </div>
     </div>
-</div>
+  </div>
+</section> -->
 
-  
-  <!-- Blogs Section -->
-  <div class="blogs">
-    <h2>Our Services</h2>
-    <div class="blogs-grid">
-      <div class="blog-item">
-        <div class="blog-image">
-          <img src="assets/develop_img.jpeg" alt="Blog 1">
-        </div>
-        <h3>Nourishing Lives: Feeding the Homeless with Dignity and Care</h3>
-        <p>we believe that no one should go to bed hungry. Our initiative, "Nourishing Lives", focuses on providing nutritious meals to homeless individuals in urban and rural areas. Through community kitchens and partnerships with local volunteers, we serve warm meals daily, ensuring that everyone has access to food with dignity and respect. Join us in our mission to fight hunger and bring hope to those in need.</p>
+<!-- Newsletter Section -->
+<section class="newsletter fade-in-on-scroll">
+  <div class="container">
+    <h2>Stay Connected With Us</h2>
+    <p>Get updates on our latest projects and how you can help</p>
+    <form class="newsletter-form" (submit)="subscribeNewsletter(); $event.preventDefault()">
+      <input 
+        type="email" 
+        [(ngModel)]="newsletterEmail"
+        name="email"
+        placeholder="Enter your email address" 
+        required
+        class="newsletter-input">
+      <button type="submit" class="newsletter-btn">Subscribe</button>
+    </form>
+  </div>
+</section>
 
-      </div>
-      <div class="blog-item">
-        <div class="blog-image">
-          <img src="assets/hgk-food.jpeg" alt="Blog 2">
-        </div>
-        <h3>Essential Aid & Relief</h3>
-        <p>From hygiene kits to educational supplies, we identify what people need the most in times of crisis and deliver it with empathy and efficiency.</p>
-      </div>
-      <div class="blog-item">
-        <div class="blog-image">
-          <img src="assets/hgk_img.jpg"  alt="Blog 3">
-        </div>
-        <h3>Community Development Success Stories</h3>
-        <p>Discover the success stories of communities we have helped build and sustain.</p>
-      </div>
-    </div>
-</div>
-
+<!-- Final CTA Section -->
+<section class="final-cta">
+  <div class="container">
+    <h2>Be the Change You Want to See</h2>
+    <p>Every contribution, big or small, makes a difference</p>
+    <a href="/donate" class="btn btn-primary-large">Make a Donation</a>
+  </div>
+</section>

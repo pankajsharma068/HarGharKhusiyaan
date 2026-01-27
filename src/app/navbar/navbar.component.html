@@ -1,29 +1,62 @@
-<nav class="navbar" [class.expanded]="menuOpen">
-  <!-- Logo and Toggle -->
-  <div class="top-row">
-    <div class="logo-text-container">
-      <a routerLink="/">
-      <img class="logo" src="/assets/hgkwf_logo.jpeg" alt="NGO Logo" />
+<nav class="navbar" [class.scrolled]="isScrolled">
+  <div class="navbar-container">
+    <!-- Left: Logo and Brand -->
+    <div class="navbar-brand">
+      <a routerLink="/" aria-label="Go to home page" class="logo-link">
+        <img class="logo" src="/assets/hgkwf_logo.jpeg" alt="Har Ghar Khushiyan Logo" />
+        <h2 class="brand-title">Har Ghar Khushiyan</h2>
       </a>
-      <h2>Har Ghar Khushiyan</h2>
     </div>
-    <div class="hamburger" (click)="toggleMenu()">
-      <span></span>
-      <span></span>
-      <span></span>
+
+    <!-- Right: Desktop Navigation -->
+    <div class="navbar-nav">
+      <a
+        *ngFor="let link of navLinks"
+        [routerLink]="link.path"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        [class.btn-primary]="link.isPrimary"
+        class="nav-link"
+      >
+        {{ link.name }}
+      </a>
     </div>
+
+    <!-- Mobile Hamburger -->
+    <button 
+      class="hamburger" 
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="menuOpen"
+      [class.active]="menuOpen"
+      aria-label="Toggle navigation menu"
+      aria-controls="mobile-navigation"
+      type="button"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </div>
 
-  <!-- Navigation Links -->
-  <div class="nav-links" [class.show-on-mobile]="menuOpen">
-    <a
-      *ngFor="let link of navLinks"
-      [routerLink]="link.path"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
-      (click)="menuOpen = false"
-    >
-      {{ link.name }}
-    </a>
+  <!-- Mobile Navigation Menu -->
+  <div 
+    id="mobile-navigation"
+    class="mobile-menu" 
+    [class.show]="menuOpen"
+    (click)="closeMenu()"
+  >
+    <div class="mobile-menu-content" (click)="$event.stopPropagation()">
+      <a
+        *ngFor="let link of navLinks"
+        [routerLink]="link.path"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        [class.btn-primary]="link.isPrimary"
+        (click)="closeMenu()"
+        class="mobile-link"
+      >
+        {{ link.name }}
+      </a>
+    </div>
   </div>
 </nav>

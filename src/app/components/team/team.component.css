@@ -1,98 +1,406 @@
-/* General styles for the team container */
+/* CSS Variables */
+:root {
+  --primary-color: #007bff;
+  --primary-hover: #0056b3;
+  --text-dark: #2c3e50;
+  --text-light: #6c757d;
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.16);
+}
+
+/* Container */
 .team-container {
-  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+}
+
+/* Header */
+.team-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.team-heading {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+}
+
+.team-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-light);
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  text-align: center;
+  margin-bottom: 40px;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: var(--primary-color);
+  border-radius: 2px;
+}
+
+/* Sections */
+.ceo-section {
+  margin-bottom: 50px;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100%;
+  text-align: center;
+}
+
+.ceo-section .team-card {
+  display: inline-block !important;
+  visibility: visible !important;
+}
+
+.leadership-section,
+.core-team-section {
+  margin-bottom: 50px;
+}
+
+/* Grid */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.team-heading {
-  text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
+.leadership-grid {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  max-width: 800px;
 }
 
-.team-row {
-  display: flex;
-  flex-wrap: wrap; /* Allow items to wrap to the next row */
-  gap: 20px;
-  justify-content: center; /* Center items horizontally */
-  margin-bottom: 40px; /* Add spacing between rows */
-}
-
-.team-member {
-  background: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  text-align: center;
-  padding: 20px;
-  flex: 1 1 calc(33.33% - 20px); /* Default: 3 items per row */
-  max-width: calc(33.33% - 20px); /* Ensure items don't exceed row width */
-}
-
-.member-image-container {
+/* Card */
+.team-card {
+  perspective: 1000px;
+  cursor: pointer;
+  height: 420px;
   width: 100%;
-  max-width: 200px;
-  margin: 0 auto;
+}
+
+.ceo-card {
+  width: 400px !important;
+  max-width: 400px;
+  height: 500px;
+  margin: 0 auto !important;
+  display: block !important;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  display: block;
+}
+
+.team-card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Front & Back */
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  background: white;
+  display: block;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Front Content */
+.card-front {
+  display: flex;
+  flex-direction: column;
+}
+
+.team-card:hover .card-front {
+  box-shadow: var(--shadow-lg);
+}
+
+.member-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 70%;
+  overflow: hidden;
+  background: #f0f0f0;
 }
 
 .member-image {
   width: 100%;
-  height: auto;
-  border-radius: 50%;
+  height: 100%;
   object-fit: cover;
+  object-position: center 20%;
+  transition: transform 0.5s;
 }
 
-.member-details {
-  margin-top: 10px;
+.team-card:hover .member-image {
+  transform: scale(1.1);
+}
+
+.image-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 60%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+  padding: 30px;
+}
+
+.team-card:hover .image-overlay {
+  opacity: 1;
+}
+
+/* Mobile - Always show click hint */
+@media (max-width: 768px) {
+  .image-overlay {
+    opacity: 1 !important;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 50%);
+  }
+  
+  .flip-hint {
+    font-size: 0.95rem;
+    padding: 10px 20px;
+  }
+}
+
+.flip-hint {
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 14px 28px;
+  background: var(--primary-color);
+  border-radius: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.member-info {
+  padding: 12px;
+  text-align: center;
 }
 
 .member-name {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 3px;
 }
 
 .member-position {
-  font-size: 1rem;
-  color: #555;
+  font-size: 0.95rem;
+  color: var(--text-light);
+  font-weight: 500;
+  margin-bottom: 5px;
 }
 
-/* Media queries for responsiveness */
+.click-hint-text {
+  font-size: 0.85rem;
+  color: var(--primary-color);
+  font-weight: 600;
+  margin-top: 5px;
+  font-style: italic;
+}
+
+.position-badge {
+  display: inline-block;
+  margin-top: 5px;
+  margin-bottom: 3px;
+  padding: 5px 14px;
+  background: var(--primary-color);
+  color: white;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* CEO Card Specific - Bigger but compact info */
+.ceo-card .member-image-wrapper {
+  height: 65%;
+}
+
+.ceo-card .member-info {
+  height: 35%;
+  padding: 5px;
+}
+
+.ceo-card .member-name {
+  font-size: 1.5rem;
+  margin-bottom: 2px;
+}
+
+.ceo-card .member-position {
+  font-size: 1.05rem;
+  margin-bottom: 3px;
+}
+
+.ceo-card .position-badge {
+  font-size: 0.75rem;
+  padding: 4px 12px;
+  margin: 3px 0;
+}
+
+.ceo-card .click-hint-text {
+  font-size: 0.8rem;
+  margin-top: 2px;
+}
+
+/* Back Content - FIXED FOR VISIBILITY */
+.card-back-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 40px;
+  text-align: center;
+  color: white;
+}
+
+.back-name {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.back-position {
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin-bottom: 20px;
+  opacity: 0.95;
+}
+
+.back-bio {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #ffffff;
+  margin-bottom: 25px;
+  max-width: 90%;
+}
+
+.contact-link {
+  display: inline-block;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 12px 28px;
+  background: rgba(255, 255, 255, 0.25);
+  border: 2px solid white;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  transition: all 0.3s;
+  margin-top: 10px;
+}
+
+.contact-link:hover {
+  background: white;
+  color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+.flip-back-hint {
+  margin-top: 20px;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-style: italic;
+}
+
+/* CEO Special */
+.ceo-card .member-image-wrapper {
+  height: 75%;
+}
+
+.ceo-card .member-name {
+  font-size: 1.8rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .team-heading {
+    font-size: 2.5rem;
+  }
+  
+  .team-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+}
+
 @media (max-width: 768px) {
   .team-container {
-    max-width: 90%; /* Reduce container width for medium screens */
+    padding: 40px 15px;
   }
 
-  .team-member {
-    flex: 1 1 calc(50% - 20px); /* 2 items per row for medium screens */
-    max-width: calc(50% - 20px);
+  .team-heading {
+    font-size: 2rem;
   }
 
-  .member-image-container {
-    max-width: 150px; /* Reduce image size */
+  .team-grid,
+  .leadership-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
   }
 
-  .member-name {
-    font-size: 1.25rem;
+  .team-card {
+    height: 320px;
   }
 
-  .member-position {
-    font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .team-container {
-    max-width: 95%; /* Further reduce container width for small screens */
+  .ceo-card {
+    height: 380px;
+    width: 100% !important;
+    max-width: 320px !important;
   }
 
-  .team-member {
-    flex: 1 1 calc(50% - 10px); /* 2 items per row for small screens */
-    max-width: calc(50% - 10px);
+  /* Mobile - Always show click hint */
+  .image-overlay {
+    opacity: 1 !important;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 50%);
   }
-
-  .member-image-container {
-    max-width: 120px; /* Further reduce image size */
+  
+  .flip-hint {
+    font-size: 0.85rem;
+    padding: 8px 16px;
   }
 
   .member-name {
@@ -100,10 +408,82 @@
   }
 
   .member-position {
+    font-size: 0.85rem;
+  }
+
+  .back-name {
+    font-size: 1.3rem;
+  }
+
+  .back-position {
+    font-size: 0.95rem;
+  }
+
+  .back-bio {
+    font-size: 0.9rem;
+  }
+
+  .card-back-content {
+    padding: 25px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .team-container {
+    padding: 30px 10px;
+  }
+
+  .team-heading {
+    font-size: 1.8rem;
+  }
+
+  .team-grid,
+  .leadership-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .team-card {
+    height: 280px;
+  }
+
+  .ceo-card {
+    height: 320px;
+    width: 90% !important;
+    max-width: 260px !important;
+  }
+
+  .member-name {
+    font-size: 0.85rem;
+  }
+
+  .member-position {
+    font-size: 0.75rem;
+  }
+
+  .back-name {
+    font-size: 1.1rem;
+  }
+
+  .back-position {
+    font-size: 0.85rem;
+  }
+
+  .back-bio {
     font-size: 0.8rem;
   }
 
-  .team-member {
-    padding: 15px; /* Reduce container padding */
+  .card-back-content {
+    padding: 20px 10px;
+  }
+
+  .flip-hint {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+  }
+
+  .contact-link {
+    font-size: 0.85rem;
+    padding: 8px 14px;
   }
 }

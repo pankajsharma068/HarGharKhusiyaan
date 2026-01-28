@@ -1,29 +1,143 @@
-<footer>
-    <div class="footer-content">
-      <!-- Left Section: Contact Details -->
-      <div class="footer-left">
-        <p style="color: #e8e1e1;">Har Ghar Khushiyan</p>
-        <p style="color: #e8e1e1;"> Address:Ward No-20 Buchar Gali,Mahabir Chowk Upper Bazar,</p>
-        <p style="color: #e8e1e1;" >Ranchi G.p.o.,Ranchi,Jharkhand</p>
-        <p style="color: #e8e1e1;" >Phone: +91 9334011565</p>
-        <p style="color: #e8e1e1;">Email: info&#64;hargkhushiyan.gmail.com</p>
-      </div>
-  
-      <!-- Middle Section: NGO Logo and Name -->
-      <div class="footer-middle">
-        <img src="assets/logo_ngo.jpg" alt="NGO Logo" class="logo">
-        <h2>Har Ghar Khushiyan</h2>
-        <p class="caption">Spreading Happiness Everywhere</p>
-      </div>
-  
-      <!-- Right Section: Social Media Links -->
-      <div class="footer-right">
-        <a href="https://www.facebook.com/share/18eucdWkE4/" target="_blank">
-          <img src="assets/facebook_icon.jpeg" alt="Facebook">
-        </a>
-        <a href="https://www.instagram.com/har_ghar_khushiyan?igsh=MTZ3NWZqNG0xZWtiZA==" target="_blank">
-          <img src="assets/Instagram_icon.png" alt="Instagram">
-        </a>
+<!-- Wave Separator -->
+<div class="footer-wave">
+  <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+    <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25"></path>
+    <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5"></path>
+    <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"></path>
+  </svg>
+</div>
+
+<footer class="footer">
+  <!-- Main Footer Content -->
+  <div class="footer-main">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <!-- About Section -->
+        <div class="footer-column">
+          <div class="footer-logo-section">
+            <img src="/assets/hgkwf_logo.jpeg" alt="Har Ghar Khushiyan Logo" class="footer-logo">
+            <h3 class="footer-brand">Har Ghar Khushiyan</h3>
+            <p class="footer-tagline">Spreading Happiness Everywhere</p>
+          </div>
+          <p class="footer-description">
+            Empowering communities through education, healthcare, and sustainable development. 
+            Join us in making a difference.
+          </p>
+          <div class="trust-badges">
+            <span class="badge">🏆 Registered NGO</span>
+            <span class="badge">✓ 80G Certified</span>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-column">
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li *ngFor="let link of quickLinks">
+              <a [routerLink]="link.path">
+                <span class="link-icon">▸</span>
+                {{ link.name }}
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Important Links -->
+        <div class="footer-column">
+          <h4 class="footer-heading">Get Involved</h4>
+          <ul class="footer-links">
+            <li *ngFor="let link of importantLinks">
+              <a [routerLink]="link.path">
+                <span class="link-icon">▸</span>
+                {{ link.name }}
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Contact & Newsletter -->
+        <div class="footer-column">
+          <h4 class="footer-heading">Contact Us</h4>
+          <ul class="footer-contact">
+            <li>
+              <span class="contact-icon">📍</span>
+              <span>Ward No-20 Buchar Gali, Mahabir Chowk Upper Bazar, Ranchi, Jharkhand</span>
+            </li>
+            <li>
+              <span class="contact-icon">📞</span>
+              <a href="tel:+919334011565">+91 9334011565</a>
+            </li>
+            <li>
+              <span class="contact-icon">✉️</span>
+              <a href="mailto:info&#64;hargharkhushiyan.co.in">info&#64;hargharkhushiyan.co.in</a>
+            </li>
+          </ul>
+
+          <!-- Newsletter Mini Form -->
+          <div class="footer-newsletter">
+            <h5>Stay Updated</h5>
+            <form (submit)="subscribeNewsletter(); $event.preventDefault()" class="newsletter-mini">
+              <input 
+                type="email" 
+                [(ngModel)]="newsletterEmail"
+                name="email"
+                placeholder="Your email" 
+                required>
+              <button type="submit">
+                <span>→</span>
+              </button>
+            </form>
+          </div>
+        </div>
+
       </div>
     </div>
-  </footer>
+  </div>
+
+  <!-- Social Media Bar -->
+  <div class="footer-social">
+    <div class="container">
+      <div class="social-content">
+        <p class="social-text">Connect With Us</p>
+        <div class="social-icons">
+          <a 
+            *ngFor="let social of socialLinks" 
+            [href]="social.url" 
+            target="_blank"
+            [attr.aria-label]="social.name"
+            class="social-icon">
+            <i [class]="social.icon"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="footer-bottom-content">
+        <p class="copyright">
+          © {{ currentYear }} Har Ghar Khushiyan. All Rights Reserved.
+        </p>
+        <div class="payment-methods">
+          <span>We Accept:</span>
+          <img src="/assets/payment-icons.png" alt="Payment Methods" class="payment-icons" onerror="this.style.display='none'">
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to Top Button -->
+<button 
+  class="back-to-top" 
+  [class.show]="showBackToTop"
+  (click)="scrollToTop()"
+  aria-label="Back to top">
+  <span>↑</span>
+</button>
+
+<!-- Font Awesome for Social Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">

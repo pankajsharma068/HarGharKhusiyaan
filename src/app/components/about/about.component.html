@@ -1,48 +1,130 @@
-<div class="about-container">
-    <!-- Header Section -->
-    <header class="about-header">
-      <h1>About Us</h1>
-      <p class="tagline">Spreading Happiness, One Home at a Time</p>
-    </header>
-  
-    <!-- Main Content Section -->
-    <div class="about-content">
-      <!-- NGO Info -->
-      <div class="ngo-info">
-        <p>
-          <strong>Har Ghar Khushiyan</strong> is a dedicated non-governmental organization (NGO) driven by a simple yet powerful mission: to bring joy, dignity, and hope to every home. Rooted in compassion and social responsibility, we work tirelessly to uplift underprivileged communities by providing essential support such as nutritious food, clean clothing, shelter, and other life necessities to those in need.
-          Established with the belief that no one should be deprived of basic human rights and dignity, Samajik Har Ghar Khushiyan has touched countless lives through its on-ground efforts and people-first approach. Our aim is not just to offer temporary relief but to build a compassionate ecosystem where every individual, regardless of their socio-economic status, can live with security, respect, and happiness.
-         </p>
-        <p>
-          We believe in the power of community and collective effort. Through our various initiatives, we strive to create a better world for everyone.
-        </p>
+<!-- Hero Section -->
+<section class="about-hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">About Har Ghar Khushiyan</h1>
+    <p class="hero-subtitle">Spreading Happiness, One Home at a Time</p>
+    <div class="hero-scroll">↓</div>
+  </div>
+</section>
+
+<!-- Impact Stats -->
+<section class="stats-section fade-in-on-scroll">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card" *ngFor="let stat of stats">
+        <div class="stat-icon">{{ stat.icon }}</div>
+        <div class="stat-value">{{ stat.value }}{{ stat.suffix }}</div>
+        <div class="stat-label">{{ stat.label }}</div>
       </div>
-  
-      <!-- Image Section -->
-      <div class="about-image">
-        <img class="logo" src="/assets/logo_ngo.jpg" alt="Har Ghar Khushiyan Team" />
-      </div>
-    </div>
-  
-    <!-- Mission and Vision Section -->
-    <div class="mission-vision">
-      <div class="mission">
-        <h2>Our Mission</h2>
-        <p>
-          To bring happiness and hope to every household by providing support, resources, and opportunities for growth.
-        </p>
-      </div>
-      <div class="vision">
-        <h2>Our Vision</h2>
-        <p>
-          A world where every individual has access to joy, dignity, and the means to thrive.
-        </p>
-      </div>
-    </div>
-  
-    <!-- Call to Action -->
-    <div class="cta">
-      <p>Join us in our journey to spread happiness!</p>
-      <a routerLink="/donate" class="cta-button">Donate Now</a>
     </div>
   </div>
+</section>
+
+<!-- Our Story Section -->
+<section class="story-section fade-in-on-scroll">
+  <div class="container">
+    <div class="story-content">
+      <div class="story-text">
+        <h2 class="section-title">Our Story</h2>
+        <p class="story-para">
+          <strong>Har Ghar Khushiyan</strong> was born from a simple yet powerful vision: to bring joy, dignity, and hope to every home. Founded in 2020, our organization is rooted in compassion and driven by an unwavering commitment to social responsibility.
+        </p>
+        <p class="story-para">
+          We work tirelessly to uplift underprivileged communities by providing essential support such as nutritious food, clean clothing, shelter, and other life necessities to those who need it most. Our mission goes beyond temporary relief – we aim to build a compassionate ecosystem where every individual, regardless of their socio-economic status, can live with security, respect, and happiness.
+        </p>
+        <p class="story-para">
+          Established with the belief that no one should be deprived of basic human rights and dignity, we have touched countless lives through our on-ground efforts and people-first approach. We believe in the power of community and collective effort, working together to create lasting change.
+        </p>
+      </div>
+      <div class="story-image">
+        <img src="/assets/logo_ngo.jpg" alt="Har Ghar Khushiyan" class="main-logo">
+        <div class="image-decoration"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mission & Vision -->
+<section class="mission-vision-section fade-in-on-scroll">
+  <div class="container">
+    <div class="mv-grid">
+      <div class="mv-card mission-card">
+        <div class="mv-icon">🎯</div>
+        <h3>Our Mission</h3>
+        <p>To bring happiness and hope to every household by providing support, resources, and opportunities for growth. We strive to empower communities through sustainable programs that address their immediate needs while building long-term resilience.</p>
+      </div>
+      <div class="mv-card vision-card">
+        <div class="mv-icon">🌟</div>
+        <h3>Our Vision</h3>
+        <p>A world where every individual has access to joy, dignity, and the means to thrive. We envision communities where happiness is not a privilege but a fundamental right, accessible to all regardless of their circumstances.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Our Journey Timeline -->
+<!-- <section class="timeline-section fade-in-on-scroll">
+  <div class="container">
+    <h2 class="section-title">Our Journey</h2>
+    <div class="timeline">
+      <div class="timeline-item" *ngFor="let item of timeline; let i = index" [class.left]="i % 2 === 0" [class.right]="i % 2 !== 0">
+        <div class="timeline-content">
+          <div class="timeline-icon">{{ item.icon }}</div>
+          <div class="timeline-year">{{ item.year }}</div>
+          <h4 class="timeline-title">{{ item.title }}</h4>
+          <p class="timeline-description">{{ item.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- Core Values -->
+<section class="values-section fade-in-on-scroll">
+  <div class="container">
+    <h2 class="section-title">Our Core Values</h2>
+    <div class="values-grid">
+      <div class="value-card" *ngFor="let value of values">
+        <div class="value-icon">{{ value.icon }}</div>
+        <h3 class="value-title">{{ value.title }}</h3>
+        <p class="value-description">{{ value.description }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- What We Do -->
+<section class="initiatives-section fade-in-on-scroll">
+  <div class="container">
+    <h2 class="section-title">What We Do</h2>
+    <div class="initiatives-grid">
+      <div class="initiative-card" *ngFor="let initiative of initiatives">
+        <div class="initiative-icon">{{ initiative.icon }}</div>
+        <h3 class="initiative-title">{{ initiative.title }}</h3>
+        <p class="initiative-description">{{ initiative.description }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team Preview -->
+<section class="team-preview fade-in-on-scroll">
+  <div class="container">
+    <h2 class="section-title">Meet Our Team</h2>
+    <p class="section-subtitle">Passionate individuals driving positive change</p>
+    <a routerLink="/team" class="btn-secondary">View Full Team →</a>
+  </div>
+</section>
+
+<!-- Call to Action -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Join Us in Spreading Happiness</h2>
+    <p>Your support can transform lives and bring hope to those in need</p>
+    <div class="cta-buttons">
+      <a routerLink="/donate" class="btn-primary">Donate Now</a>
+      <a routerLink="/contact" class="btn-outline">Volunteer With Us</a>
+    </div>
+  </div>
+</section>

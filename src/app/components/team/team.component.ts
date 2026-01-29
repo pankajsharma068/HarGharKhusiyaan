@@ -66,6 +66,12 @@ export class TeamComponent implements AfterViewInit {
       bio: 'Building partnerships to fund our mission.'
     },
     {
+      name: 'Narayan Sharma',
+      position: 'Fundraising Manager',
+      imageUrl: '/assets/narayan_sharma.jpeg',
+      bio: 'Building partnerships to fund our mission.'
+    },
+    {
       name: 'Chirag Sharma',
       position: 'Finance Officer',
       imageUrl: '/assets/chirag.jpeg',

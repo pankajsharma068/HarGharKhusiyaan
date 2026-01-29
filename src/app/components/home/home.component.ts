@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   
   images = [
     { 
-      src: '/assets/front_img.jpeg', 
+      src: '/assets/front_main.jpeg', 
       caption: 'Spreading Happiness in Every Home',
       subtitle: 'Join us in making a difference'
     },
@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       subtitle: 'Your support changes lives'
     },
     { 
-      src: 'https://y4d.ngo/admin/uploads/banner/Landing_banner4.jpg', 
+      src: '/assets/front_main3.jpeg', 
       caption: 'Building a Better Tomorrow',
       subtitle: 'Every contribution matters'
     }
@@ -97,7 +97,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       icon: '🏥'
     },
     {
-      image: '/assets/hgk_img.jpg',
+      image: '/assets/front_main3.jpeg',
       title: 'Community Development',
       description: 'To improve the environment and ecology in the rural area by taking up different protection programmes. Tree plantation and renewable energy will be emphasized upon to bring sustainable change.',
       icon: '🌱'

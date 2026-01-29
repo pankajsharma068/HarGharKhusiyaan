@@ -25,6 +25,7 @@ export class NavbarComponent implements OnInit {
     { name: 'About Us', path: '/about' },
     { name: 'Contact', path: '/contact' },
     { name: 'Team', path: '/team' },
+    { name: 'Gallery', path: '/gallery' },
     { name: 'Donate', path: '/donate', isPrimary: true },
   ];
 

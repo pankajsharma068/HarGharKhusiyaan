@@ -1,0 +1,86 @@
+<div class="gallery-container">
+    <!-- Header Section -->
+    <div class="gallery-header">
+      <h1 class="gallery-title">Our Gallery</h1>
+      <p class="gallery-subtitle">Capturing moments of impact and community transformation</p>
+    </div>
+  
+    <!-- Filter Buttons -->
+    <div class="filter-container">
+      <button 
+        *ngFor="let category of categories"
+        class="filter-btn"
+        [class.active]="selectedFilter === category"
+        (click)="filterGallery(category)">
+        {{ category | titlecase }}
+      </button>
+    </div>
+  
+    <!-- Gallery Grid -->
+    <div class="gallery-grid">
+      <div 
+        *ngFor="let image of filteredImages; let i = index"
+        class="gallery-item"
+        [style.animation-delay.ms]="i * 50"
+        (click)="openLightbox(image)">
+        <div class="image-wrapper">
+          <img [src]="image.url" [alt]="image.title" loading="lazy">
+          <div class="image-overlay">
+            <div class="overlay-content">
+              <h3 class="image-title">{{ image.title }}</h3>
+              <span class="image-category">{{ image.category | titlecase }}</span>
+            </div>
+            <div class="zoom-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+                <line x1="11" y1="8" x2="11" y2="14"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Empty State -->
+    <div *ngIf="filteredImages.length === 0" class="empty-state">
+      <p>No images found in this category.</p>
+    </div>
+  
+    <!-- Lightbox Modal -->
+    <div class="lightbox" *ngIf="selectedImage" (click)="closeLightbox()">
+      <div class="lightbox-content" (click)="$event.stopPropagation()">
+        <!-- Close Button -->
+        <button class="lightbox-close" (click)="closeLightbox()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+  
+        <!-- Previous Button -->
+        <button class="lightbox-nav lightbox-prev" (click)="navigateImage('prev')">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+  
+        <!-- Image -->
+        <div class="lightbox-image-container">
+          <img [src]="selectedImage.url" [alt]="selectedImage.title">
+          <div class="lightbox-info">
+            <h3>{{ selectedImage.title }}</h3>
+            <span class="lightbox-category">{{ selectedImage.category | titlecase }}</span>
+          </div>
+        </div>
+  
+        <!-- Next Button -->
+        <button class="lightbox-nav lightbox-next" (click)="navigateImage('next')">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>

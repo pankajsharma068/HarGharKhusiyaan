@@ -1,77 +1,249 @@
-<div class="contact-container">
-  <h2>Contact Us</h2>
-  <!-- <form (ngSubmit)="onSubmitform()" #contactForm="ngForm" class="contact-form">
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" ngModel required class="form-control">
-    </div>
-
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" ngModel required email class="form-control">
-    </div>
-
-    <div class="form-group">
-      <label for="message">Message</label>
-      <textarea id="message" name="message" ngModel required class="form-control"></textarea>
-    </div>
-
-    <button type="submit" [disabled]="!contactForm.form.valid" class="submit-button">Submit</button>
-  </form> -->
-
-  <form (submit)="onSubmit($event)" class="contact-form">
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" required class="form-control">
-    </div>
-
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required class="form-control">  
-    </div>
-
-    <div class="form-group">
-      <label for="message">Message</label>
-      <textarea id="message" name="message" required class="form-control"></textarea>
-    </div>
-
-    <input type="hidden" name="_captcha" value="false" />
-
-
-    <button type="submit" class="submit-button">Submit</button>
-  </form>
-
-  <!-- <div class="contact-info">
-    <h3>Reach Us</h3>
-    <p>Phone: +91 9334011565</p>
-    <p>Email: hargharkhushiyan@gmail.com</p>
-  </div> -->
-
-  <!-- <div  class="success-popup">
-    Your message has been sent successfully!
-  </div> -->
-
-  
-  <div class="contact-info">
-    <h3>Reach Us</h3>
-    <p>Phone: +91 9334011565</p>
-    <p>Email: hargharkhushiyan.gmail.com</p>
-
-    <!-- WhatsApp Link -->
-    <a
-      class="whatsapp-link"
-      href="https://wa.me/919334011565"
-      target="_blank"
-      rel="noopener"
-      title="Chat with us on WhatsApp"
-    >
-      <!-- Inline WhatsApp SVG Icon -->
-    
-      <a>
-        <img src="assets/whatsapp_logo.png" alt="WhatsApp Icon" class="whatsapp-icon" />
-      </a>
-      Chat on WhatsApp
-    </a>
+<!-- Hero Section -->
+<section class="contact-hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">Get In Touch</h1>
+    <p class="hero-subtitle">We'd love to hear from you. Let's start a conversation.</p>
   </div>
+</section>
 
+<!-- Quick Contact Cards -->
+<section class="quick-contact fade-in-on-scroll">
+  <div class="container">
+    <div class="contact-cards">
+      <div class="contact-card" (click)="callPhone()">
+        <div class="card-icon">📞</div>
+        <h3>Call Us</h3>
+        <p>{{ contactInfo.phone }}</p>
+        <span class="card-action">Tap to call →</span>
+      </div>
+
+      <div class="contact-card" (click)="sendEmail()">
+        <div class="card-icon">✉️</div>
+        <h3>Email Us</h3>
+        <p>{{ contactInfo.email }}</p>
+        <span class="card-action">Send email →</span>
+      </div>
+
+      <div class="contact-card" (click)="openWhatsApp()">
+        <div class="card-icon">💬</div>
+        <h3>WhatsApp</h3>
+        <p>Chat with us</p>
+        <span class="card-action">Open WhatsApp →</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Reasons -->
+<section class="contact-reasons fade-in-on-scroll">
+  <div class="container">
+    <h2 class="section-title">How Can We Help?</h2>
+    <div class="reasons-grid">
+      <div 
+        class="reason-card" 
+        *ngFor="let reason of contactReasons"
+        (click)="selectReason(reason.title)">
+        <div class="reason-icon">{{ reason.icon }}</div>
+        <h3>{{ reason.title }}</h3>
+        <p>{{ reason.description }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Main Contact Section -->
+<section class="main-contact fade-in-on-scroll">
+  <div class="container">
+    <div class="contact-grid">
+      
+      <!-- Contact Form -->
+      <div class="form-section">
+        <h2>Send Us a Message</h2>
+        <form (submit)="onSubmit($event)" class="contact-form">
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Full Name *</label>
+              <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                [(ngModel)]="formData.name"
+                required 
+                class="form-control"
+                placeholder="John Doe">
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                [(ngModel)]="formData.email"
+                required 
+                class="form-control"
+                placeholder="john@example.com">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input 
+                type="tel" 
+                id="phone" 
+                name="phone" 
+                [(ngModel)]="formData.phone"
+                class="form-control"
+                placeholder="+91 98765 43210">
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <select 
+                id="subject" 
+                name="subject" 
+                [(ngModel)]="formData.subject"
+                class="form-control">
+                <option value="">Select a subject</option>
+                <option value="Volunteer">Volunteer Inquiry</option>
+                <option value="Donate">Donation Query</option>
+                <option value="Partner">Partnership</option>
+                <option value="General">General Inquiry</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea 
+              id="message" 
+              name="message" 
+              [(ngModel)]="formData.message"
+              required 
+              rows="6"
+              class="form-control"
+              placeholder="Tell us how we can help you..."></textarea>
+          </div>
+
+          <input type="hidden" name="_captcha" value="false" />
+
+          <button 
+            type="submit" 
+            class="submit-button"
+            [disabled]="isSubmitting">
+            <span *ngIf="!isSubmitting">Send Message</span>
+            <span *ngIf="isSubmitting">Sending...</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Contact Info Sidebar -->
+      <div class="info-section">
+        <div class="info-card">
+          <h3>Contact Information</h3>
+          
+          <div class="info-item">
+            <div class="info-icon">📍</div>
+            <div class="info-content">
+              <h4>Address</h4>
+              <p>{{ contactInfo.address }}</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">📞</div>
+            <div class="info-content">
+              <h4>Phone</h4>
+              <p>{{ contactInfo.phone }}</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">✉️</div>
+            <div class="info-content">
+              <h4>Email</h4>
+              <p>{{ contactInfo.email }}</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">🕒</div>
+            <div class="info-content">
+              <h4>Working Hours</h4>
+              <p>{{ contactInfo.workingHours }}</p>
+            </div>
+          </div>
+
+          <div class="social-links">
+            <h4>Follow Us</h4>
+            <div class="social-icons">
+              <a 
+                *ngFor="let social of socialMedia"
+                [href]="social.url" 
+                target="_blank"
+                [title]="social.name"
+                class="social-icon">
+                {{ social.icon }}
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- WhatsApp Quick Action -->
+        <div class="whatsapp-banner">
+          <div class="whatsapp-icon-large">💬</div>
+          <h4>Need Quick Help?</h4>
+          <p>Chat with us on WhatsApp</p>
+          <button class="whatsapp-button" (click)="openWhatsApp()">
+            <img src="/assets/whatsapp_logo.png" alt="WhatsApp" class="whatsapp-logo">
+            Start Chat
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Map Section -->
+<section class="map-section fade-in-on-scroll">
+  <div class="container">
+    <h2 class="section-title">Find Us</h2>
+    <div class="map-container">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3662.8347!2d85.3240!3d23.3441!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDIwJzM4LjgiTiA4NcKwMTknMjYuNCJF!5e0!3m2!1sen!2sin!4v1234567890"
+        width="100%" 
+        height="450" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy"
+        class="map-iframe">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- Success Modal -->
+<div class="modal-overlay" *ngIf="showSuccessModal" (click)="closeModal()">
+  <div class="modal-content success" (click)="$event.stopPropagation()">
+    <button class="modal-close" (click)="closeModal()">×</button>
+    <div class="modal-icon success">✓</div>
+    <h2>Message Sent Successfully!</h2>
+    <p>Thank you for reaching out. We'll get back to you within 24 hours.</p>
+    <button class="modal-button" (click)="closeModal()">Close</button>
+  </div>
+</div>
+
+<!-- Error Modal -->
+<div class="modal-overlay" *ngIf="showErrorModal" (click)="closeModal()">
+  <div class="modal-content error" (click)="$event.stopPropagation()">
+    <button class="modal-close" (click)="closeModal()">×</button>
+    <div class="modal-icon error">⚠️</div>
+    <h2>Oops!</h2>
+    <p>{{ errorMessage }}</p>
+    <button class="modal-button" (click)="closeModal()">Try Again</button>
+  </div>
 </div>

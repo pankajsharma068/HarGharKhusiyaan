@@ -4,6 +4,7 @@ import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { DonateComponent } from './components/donate/donate.component';
 import { TeamComponent } from './components/team/team.component';
+import { GalleryComponent } from './components/gallery/gallery.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -11,5 +12,6 @@ export const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'donate', component: DonateComponent },
   { path: 'team', component: TeamComponent },
+  { path: 'gallery', component: GalleryComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' } // Default route
 ];
